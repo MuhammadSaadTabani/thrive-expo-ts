@@ -14,13 +14,6 @@ import IconInput from '../../components/common/IconInput';
 import Logo from '../../components/common/Logo';
 import { validateEmail } from '../../utils';
     
-import AzureAuth from 'react-native-azure-auth';
-
-const azureAuth = new AzureAuth({
-    clientId: '17uoEtuihi6Lsg4hdedT7PUhF4FNgBPD2F'
-});
-
-
 export default ({navigation}) => {
 
 
@@ -39,21 +32,6 @@ export default ({navigation}) => {
     // const [activeInput, setActiveInput] = useState('');
 
     const onSigninPress = async () => {
-
-    
-
-        try {
-            let tokens = await azureAuth.webAuth.authorize({scope: 'openid profile User.Read Mail.Read' })
-            // this.setState({ accessToken: tokens.accessToken });
-            let info = await azureAuth.auth.msGraphRequest({token: tokens.accessToken, path: '/me'})
-            // this.setState({ user: info.displayName, userId: tokens.userId })
-
-            console.log('info', info);
-            console.log('token', tokens);
-
-        } catch (error) {
-            console.log(error)
-        }
 
         // setError('')
         // if(!email.value){

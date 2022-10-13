@@ -5,8 +5,19 @@ import 'react-native-gesture-handler';
 import { isReadyRef, navigationRef } from '../navigation';
 import AuthRoutes from './AuthRoutes';
 import MainRoutes from './MainRoutes';
+import { AuthProvider } from "ad-b2c-react-native";
+import * as Linking from "expo-linking";
+import Constants from "expo-constants";
 
 const Stack = createStackNavigator();
+
+
+const prefix = Linking.createURL("/");
+
+const linking = {
+  prefixes: [prefix],
+};
+
 
 const Routes = () => {
 
@@ -55,17 +66,38 @@ const Routes = () => {
                 </NavigationContainer>
             </AuthContext.Provider> */}
 
+
                 <NavigationContainer 
                     // theme={{colors:{background:colors.background}}}
                     ref={navigationRef}
                     onReady={() => {
                         isReadyRef.current = true;
                     }}
+                    linking={linking} 
+                    fallback={<Text>Loading...</Text>}
                 >
-                    <Stack.Navigator screenOptions={{headerShown: false}}>
+                    <AuthProvider
+                        tenant="ThriveDev"
+                        appId="15449bbf-50c6-48db-bfbc-0e264c81ae3c"
+                        loginPolicy="B2C_1A_signin_only"
+                        passwordResetPolicy="B2C_1A_DISPLAYCONTROL_SENDGRID_PASSWORDRESET"
+                        profileEditPolicy="B2C_1_ProfleEdit"
+                        redirectURI={Linking.createURL("redirect")}
+                        createNewTask={Constants.appOwnership === "expo"}
+                        showInRecents={Constants.appOwnership === "expo"}
+                    >
+                        <Stack.Navigator>
+                        <Stack.Screen name={RouteNames.home} component={Home} />
+                        <Stack.Screen name={RouteNames.private} component={Protected} />
+                        <Stack.Screen name={RouteNames.redirect} component={Redirect} />
+                        </Stack.Navigator>
+                    </AuthProvider> 
+
+
+                    {/* <Stack.Navigator screenOptions={{headerShown: false}}>
                         <Stack.Screen name="AuthRoutes" component={AuthRoutes}/>   
                         <Stack.Screen name="MainRoutes" component={MainRoutes}/>   
-                    </Stack.Navigator>
+                    </Stack.Navigator> */}
                 </NavigationContainer>
         </>
     )
