@@ -1,12 +1,13 @@
 import { useNavigation, useRoute } from "@react-navigation/core";
 import { useAuth } from "ad-b2c-react-native";
 import React, { useEffect } from "react";
-import { Text } from "react-native";
+import { Text, View } from "react-native";
+import Loader from "../../components/common/Loader";
 import {
   AuthScreenRouteProp,
   RootStackNavigationProp,
   RouteNames,
-} from "./navTypes";
+} from "../../routes/navTypes";
 
 export default function () {
   const { handleRedirectAsync } = useAuth();
@@ -27,5 +28,13 @@ export default function () {
         nav.replace(RouteNames.home);
       });
   }, [route.params]);
-  return <Text>Authenticating</Text>;
+
+
+  return (
+    <View style={{flex:1, justifyContent:'center', alignItems: 'center'}}>
+      <Loader/>
+    </View>
+  )
+
+  
 }

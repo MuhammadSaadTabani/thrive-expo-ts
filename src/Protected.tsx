@@ -4,7 +4,7 @@ import { useAuth, useToken } from "ad-b2c-react-native";
 import { WebBrowserAuthSessionResult } from "expo-web-browser";
 import React, { useCallback, useEffect, useState } from "react";
 import { Button, Text, StyleSheet, View, Platform } from "react-native";
-import { RootStackNavigationProp, RouteNames } from "./navTypes";
+import { RootStackNavigationProp, RouteNames } from "./routes/navTypes";
 
 const styles = StyleSheet.create({
   container: {
@@ -16,10 +16,14 @@ const styles = StyleSheet.create({
 });
 
 export default function () {
+
   const { getTokensAsync, isLoading, error, isAuthentic } = useToken();
   const { logOutAsync, editProfileAsync, resetPasswordAsync } = useAuth();
+  
   const nav = useNavigation<RootStackNavigationProp>();
+  
   const [newUrl, setNewUrl] = useState("");
+  
   const [tokenRes, setTokenRes] = useState<
     Awaited<ReturnType<typeof getTokensAsync>>
   >({
@@ -30,6 +34,7 @@ export default function () {
     error: "",
     isAuthentic: false,
   });
+  
   const routesLength = useNavigationState((state) => {
     return state.routes.length;
   });
