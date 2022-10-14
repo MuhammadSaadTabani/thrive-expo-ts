@@ -2,8 +2,9 @@ import { StyleSheet, Text, View, ScrollView, Image, TextInput} from 'react-nativ
 import React from 'react'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
-import Entypo from 'react-native-vector-icons/Entypo';
-import Feather from 'react-native-vector-icons/Feather';
+
+import Entypo from '@expo/vector-icons/Entypo';
+import Feather from '@expo/vector-icons/Feather';
 
 import theme from '../../../assets/colors';
 import fonts from '../../../assets/fonts';

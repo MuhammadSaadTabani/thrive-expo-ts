@@ -4,7 +4,6 @@ import {ProgressChart} from 'react-native-chart-kit';
 import theme from '../../assets/colors';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import fonts from '../../assets/fonts';
-// import LinearGradient from 'react-native-linear-gradient';
 
 const FocusCard = () => {
     const data = {

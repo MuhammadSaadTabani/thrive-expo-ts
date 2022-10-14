@@ -1,9 +1,12 @@
 import { StyleSheet, Text, View, ScrollView, Image, TouchableOpacity} from 'react-native'
 import React, {useState} from 'react'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import LinearGradient from 'react-native-linear-gradient';
-import Entypo from 'react-native-vector-icons/Entypo';
-import Octicons from 'react-native-vector-icons/Octicons'
+import {LinearGradient} from 'expo-linear-gradient';
+
+
+import Entypo from '@expo/vector-icons/Entypo';
+import Octicons from '@expo/vector-icons/Octicons';
+
 import Slider from '@react-native-community/slider';
 
 import theme from '../../../assets/colors';

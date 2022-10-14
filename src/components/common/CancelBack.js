@@ -5,7 +5,8 @@ import {
     TouchableOpacity,
 } from 'react-native';
 import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import Icon from '@expo/vector-icons/MaterialCommunityIcons';
+
 import theme from '../../assets/colors';
 
 export default () => {

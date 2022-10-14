@@ -11,7 +11,9 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-import Entypo from 'react-native-vector-icons/Entypo';
+
+import Entypo from '@expo/vector-icons/Entypo';
+
 
 import theme from '../../../assets/colors';
 import fonts from '../../../assets/fonts';

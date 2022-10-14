@@ -3,7 +3,8 @@ import React from 'react'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Logo from '../../components/common/Logo';
 import theme from '../../assets/colors';
-import Entypo from 'react-native-vector-icons/Entypo';
+import Entypo from '@expo/vector-icons/Entypo';
+
 
 const Header = ({onPress}) => {
   return (
@@ -24,6 +25,7 @@ const styles = StyleSheet.create({
     header: {
         flexDirection: 'row',
         justifyContent: 'center',
+        marginTop: hp('3%'),
         alignItems: 'center',
         paddingVertical: 20,
         borderBottomColor: 'black',

@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState} from 'react'
+import React, {useCallback, useContext, useEffect, useState} from 'react'
 import { 
     View,
     Text,
@@ -17,6 +17,8 @@ import { RouteNames } from '../../routes/navTypes';
 import { useToken } from "ad-b2c-react-native";
 import { validateEmail } from '../../utils';
 import { useFocusEffect, useNavigationState } from '@react-navigation/native';
+import { setItem } from '../../storage';
+import { AuthContext } from '../../context';
     
 export default ({navigation}) => {
 
@@ -49,6 +51,8 @@ export default ({navigation}) => {
             isAuthentic: false,
     });
 
+    const context = useContext(AuthContext);
+
     useEffect(()=>{
         console.log('response', tokenRes)
     },[tokenRes]);
@@ -79,12 +83,18 @@ export default ({navigation}) => {
     
 
     const redirectforLogin = () => {
-        getTokensAsync().then((x) => {
+        getTokensAsync().then(async (x) => {
+            console.log(x)
             if (x.error) {
 
                 alert('couldnt login')
 
                 // nav.replace(RouteNames.home);
+            }
+            if(x.access){
+                await setItem('token', JSON.stringify(x));
+                context.updateState();
+                // navigation.navigate(RouteNames.home)
             }
             setTokenRes(x);
             if (x.url) {

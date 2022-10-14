@@ -2,9 +2,10 @@ import { RouteProp } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 
 export enum RouteNames {
+  login = "login",
   home = "home",
   redirect = "redirect",
-  private = "private",
+  auth = 'auth'
 }
 
 export type RootStackParamList = {
@@ -14,8 +15,9 @@ export type RootStackParamList = {
     error: string;
     error_description: string;
   };
+  [RouteNames.login]: undefined;
   [RouteNames.home]: undefined;
-  [RouteNames.private]: undefined;
+  [RouteNames.auth]: undefined;
 };
 
 export type AuthScreenRouteProp = RouteProp<

@@ -6,7 +6,9 @@ import {
     TextInput,
     StyleSheet
 } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
+
+import Icon from '@expo/vector-icons/Ionicons';
+
 import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import theme, { black, darkGray } from '../../assets/colors';
 

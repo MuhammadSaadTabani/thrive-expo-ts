@@ -4,7 +4,8 @@ import {
     Text,
 } from 'react-native'
 import { heightPercentageToDP as hp } from 'react-native-responsive-screen'
-import Icon from 'react-native-vector-icons/MaterialIcons'
+import Icon from '@expo/vector-icons/MaterialIcons';
+
 import theme from '../../assets/colors'
 export default ({text}) => (
     <View 

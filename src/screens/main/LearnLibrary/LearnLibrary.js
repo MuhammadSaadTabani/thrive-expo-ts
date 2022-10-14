@@ -1,8 +1,9 @@
 import { StyleSheet, Text, View, ScrollView, Image} from 'react-native'
 import React from 'react'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import LinearGradient from 'react-native-linear-gradient';
-import Entypo from 'react-native-vector-icons/Entypo';
+import {LinearGradient} from 'expo-linear-gradient';
+import Entypo from '@expo/vector-icons/Entypo';
+
 
 import theme from '../../../assets/colors';
 import fonts from '../../../assets/fonts';

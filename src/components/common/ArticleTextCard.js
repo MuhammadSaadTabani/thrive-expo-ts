@@ -3,7 +3,8 @@ import React from 'react'
 import theme from '../../assets/colors'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import fonts from '../../assets/fonts';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+
 
 const ArticleTextCard = ({category, number, title, topColor, onPress}) => {
   return (

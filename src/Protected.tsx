@@ -45,7 +45,7 @@ export default function () {
       setNewUrl("");
       getTokensAsync().then((x) => {
         if (x.error) {
-          nav.replace(RouteNames.home);
+          nav.replace(RouteNames.login);
         }
         setTokenRes(x);
         if (x.url) {
@@ -121,7 +121,7 @@ export default function () {
     <View style={styles.container}>
       <Button
         title="Logout"
-        onPress={() => logOutAsync().then(() => nav.navigate(RouteNames.home))}
+        onPress={() => logOutAsync().then(() => nav.navigate(RouteNames.login))}
       />
       <Button
         title="Reset password"

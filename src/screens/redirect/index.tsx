@@ -8,6 +8,7 @@ import {
   RootStackNavigationProp,
   RouteNames,
 } from "../../routes/navTypes";
+import { getItem } from "../../storage";
 
 export default function () {
   const { handleRedirectAsync } = useAuth();
@@ -20,12 +21,24 @@ export default function () {
         if (nav.canGoBack()) {
           nav.goBack();
         } else {
-          nav.replace(RouteNames.home);
+          getItem('token').then(token => {
+            if(token){
+              nav.replace(RouteNames.home);
+            }else{
+              nav.replace(RouteNames.login);
+            }
+          })
         }
       })
       .catch((ex: any) => {
         console.log(ex);
-        nav.replace(RouteNames.home);
+        getItem('token').then(token => {
+          if(token){
+            nav.replace(RouteNames.home);
+          }else{
+            nav.replace(RouteNames.login);
+          }
+        })
       });
   }, [route.params]);
 

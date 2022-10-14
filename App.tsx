@@ -10,6 +10,8 @@ import Redirect from "./src/screens/redirect";
 import Routes from "./src/routes";
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
+import { Provider } from "react-redux";
+import { store } from "./src/redux/store";
 
 
 const Stack = createStackNavigator();
@@ -36,7 +38,9 @@ export default function App() {
   }
 
   return (
+    <Provider store={store} >
       <Routes/>
+    </Provider>
   );
 }
 
