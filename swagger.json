@@ -1,0 +1,2777 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "title": "OpenAPI Document on Azure Functions",
+      "version": "1.0.0"
+    },
+    "host": "inwl-func-thriveapi-dev.azurewebsites.net",
+    "basePath": "/api",
+    "schemes": [
+      "https"
+    ],
+    "paths": {
+      "/Activities/UnCommitted": {
+        "get": {
+          "tags": [
+            "Activity"
+          ],
+          "description": "Gets a list of all Activity not commitment for an UserId.",
+          "operationId": "ListUnCommittedActivities",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "header",
+              "name": "userid",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful operation.",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/activityViewModel"
+                }
+              }
+            },
+            "400": {
+              "description": "Invalid UserId.",
+              "schema": {
+                "type": "string"
+              }
+            },
+            "500": {
+              "description": "Internal Error from Server or downstream service.",
+              "schema": {
+                "type": "string"
+              }
+            }
+          },
+          "x-ms-visibility": "important"
+        }
+      },
+      "/Activity/Detail/{ActivityId}": {
+        "get": {
+          "tags": [
+            "Activity"
+          ],
+          "description": "Gets activity detail by Id",
+          "operationId": "GetActivityDetail",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "path",
+              "name": "ActivityId",
+              "description": "Activity Id",
+              "required": true,
+              "type": "string",
+              "x-ms-visibility": "important"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful operation.",
+              "schema": {
+                "$ref": "#/definitions/activityViewModel"
+              }
+            },
+            "400": {
+              "description": "Invalid UserId.",
+              "schema": {
+                "type": "string"
+              }
+            },
+            "500": {
+              "description": "Internal Error from Server or downstream service.",
+              "schema": {
+                "type": "string"
+              }
+            }
+          },
+          "x-ms-visibility": "important"
+        }
+      },
+      "/CustomActivity": {
+        "post": {
+          "tags": [
+            "Activity"
+          ],
+          "description": "Create a new custom Activity for a user and commit it",
+          "operationId": "CreateCustomActivity",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "header",
+              "name": "userid",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "in": "header",
+              "name": "X-Local-Time",
+              "required": true,
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Custom Activity",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/customActivityDataModel"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful operation.",
+              "schema": {
+                "$ref": "#/definitions/activityCommitmentViewModel"
+              }
+            },
+            "400": {
+              "description": "Invalid Activity.",
+              "schema": {
+                "type": "string"
+              }
+            },
+            "500": {
+              "description": "Internal Error from Server or downstream service.",
+              "schema": {
+                "type": "string"
+              }
+            }
+          },
+          "x-ms-visibility": "important"
+        }
+      },
+      "/ActivityCommitment/{ActivityCommitmentId}": {
+        "get": {
+          "tags": [
+            "Activity Commitment"
+          ],
+          "description": "Gets activity commitment detail by commitment id",
+          "operationId": "GetActivityCommitmentDetail",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "path",
+              "name": "ActivityCommitmentId",
+              "description": "Activity commitment Id",
+              "required": true,
+              "type": "string",
+              "x-ms-visibility": "important"
+            },
+            {
+              "in": "header",
+              "name": "X-Local-Time",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "in": "header",
+              "name": "userid",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful operation.",
+              "schema": {
+                "$ref": "#/definitions/activityCommitmentViewModel"
+              }
+            },
+            "400": {
+              "description": "Invalid UserId.",
+              "schema": {
+                "type": "string"
+              }
+            },
+            "500": {
+              "description": "Internal Error from Server or downstream service.",
+              "schema": {
+                "type": "string"
+              }
+            }
+          },
+          "x-ms-visibility": "important"
+        }
+      },
+      "/ActivityCommitments/Active": {
+        "get": {
+          "tags": [
+            "Activity Commitment"
+          ],
+          "description": "Gets a list of all active activity commitments for an UserId.",
+          "operationId": "listCommittedActivities",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "header",
+              "name": "X-Local-Time",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "in": "header",
+              "name": "userid",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful operation.",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/activityCommitmentViewModel"
+                }
+              }
+            },
+            "400": {
+              "description": "Invalid UserId.",
+              "schema": {
+                "type": "string"
+              }
+            },
+            "500": {
+              "description": "Internal Error from Server or downstream service.",
+              "schema": {
+                "type": "string"
+              }
+            }
+          },
+          "x-ms-visibility": "important"
+        }
+      },
+      "/ActivityCommitment/Commit": {
+        "post": {
+          "tags": [
+            "Activity Commitment"
+          ],
+          "description": "Commits Activity for a specified UserId.",
+          "operationId": "CommitActivity",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "header",
+              "name": "X-Local-Time",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "in": "header",
+              "name": "userid",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Activity that need to be committed for an User.",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/activityCommitmentDataModel"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Activity have been committed.",
+              "schema": {
+                "$ref": "#/definitions/activityCommitmentViewModel"
+              }
+            },
+            "400": {
+              "description": "Invalid request.",
+              "schema": {
+                "$ref": "#/definitions/activityCommitmentDataModel"
+              }
+            },
+            "500": {
+              "description": "Internal Error from Server or downstream service.",
+              "schema": {
+                "type": "string"
+              }
+            }
+          },
+          "x-ms-visibility": "important"
+        }
+      },
+      "/ActivityCommitment/Archive": {
+        "post": {
+          "tags": [
+            "Activity Commitment"
+          ],
+          "description": "Archives activity for a specified UserId.",
+          "operationId": "ArchiveActivity",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "header",
+              "name": "userid",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Activity that need to be committed for an User.",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/activityArchiveDataModel"
+              }
+            }
+          ],
+          "responses": {
+            "400": {
+              "description": "Invalid UserId.",
+              "schema": {
+                "$ref": "#/definitions/activityArchiveDataModel"
+              }
+            },
+            "500": {
+              "description": "Internal Error from Server or downstream service.",
+              "schema": {
+                "type": "string"
+              }
+            },
+            "200": {
+              "description": "Activity have been archived."
+            }
+          },
+          "x-ms-visibility": "important"
+        }
+      },
+      "/ActivityTracking/Track": {
+        "post": {
+          "tags": [
+            "Activity Commitment Tracking"
+          ],
+          "description": "Tracks activity commitment for a user for the specified date",
+          "operationId": "TrackActivityCommitment",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "header",
+              "name": "userid",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "in": "header",
+              "name": "X-Local-Time",
+              "required": true,
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "in": "body",
+              "name": "body",
+              "description": "The Activity Commitment that needs to be tracked.",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/activityTrackingDataModel"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Activity has been updated as Completed.",
+              "schema": {
+                "$ref": "#/definitions/activityTracking"
+              }
+            },
+            "400": {
+              "description": "Invalid input data.",
+              "schema": {
+                "type": "string"
+              }
+            },
+            "500": {
+              "description": "Internal Error from Server or downstream service.",
+              "schema": {
+                "type": "string"
+              }
+            }
+          },
+          "x-ms-visibility": "important"
+        }
+      },
+      "/ActivityTracking/UnTrack": {
+        "post": {
+          "tags": [
+            "Activity Commitment Tracking"
+          ],
+          "description": "Untracks activity commitment for a user for the specified date",
+          "operationId": "UndoTrackActivityCommitment",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "header",
+              "name": "userid",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "in": "header",
+              "name": "X-Local-Time",
+              "required": true,
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "in": "body",
+              "name": "body",
+              "description": "The Activity Commitment that needs to be un-tracked.",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/activityTrackingDataModel"
+              }
+            }
+          ],
+          "responses": {
+            "400": {
+              "description": "Invalid input data.",
+              "schema": {
+                "type": "string"
+              }
+            },
+            "500": {
+              "description": "Internal Error from Server or downstream service.",
+              "schema": {
+                "type": "string"
+              }
+            },
+            "200": {
+              "description": "Activity has been updated as Not Completed."
+            }
+          },
+          "x-ms-visibility": "important"
+        }
+      },
+      "/ActivityTracking/DailyStatus/{ActivityCommitmentId}": {
+        "get": {
+          "tags": [
+            "Activity Commitment Tracking"
+          ],
+          "description": "Get activity tracking status (daily) for specified UserId for a month",
+          "operationId": "GetActivityDailyTrackingStatus",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "path",
+              "name": "ActivityCommitmentId",
+              "description": "Activity commitment Id",
+              "required": true,
+              "type": "string",
+              "x-ms-visibility": "important"
+            },
+            {
+              "in": "query",
+              "name": "StartDate",
+              "description": "Activity commitment Id",
+              "type": "string",
+              "format": "date-time",
+              "x-ms-visibility": "important"
+            },
+            {
+              "in": "query",
+              "name": "EndDate",
+              "description": "Activity commitment Id",
+              "type": "string",
+              "format": "date-time",
+              "x-ms-visibility": "important"
+            },
+            {
+              "in": "header",
+              "name": "userid",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "in": "header",
+              "name": "X-Local-Time",
+              "required": true,
+              "type": "string",
+              "format": "date-time"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Activity tracking daily status, with day.",
+              "schema": {
+                "$ref": "#/definitions/activityTrackingStatusViewModel"
+              }
+            },
+            "400": {
+              "description": "Invalid input data.",
+              "schema": {
+                "type": "string"
+              }
+            },
+            "500": {
+              "description": "Internal Error from Server or downstream service.",
+              "schema": {
+                "type": "string"
+              }
+            }
+          },
+          "x-ms-visibility": "important"
+        }
+      },
+      "/AnswerSet": {
+        "post": {
+          "tags": [
+            "Answerset"
+          ],
+          "description": "Save instrument answers for the questionnaire for a user",
+          "operationId": "SaveAnswerSet",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "header",
+              "name": "userid",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "in": "header",
+              "name": "X-Local-Time",
+              "required": true,
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "in": "header",
+              "name": "organisations",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "in": "body",
+              "name": "body",
+              "description": "The answer set.",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/answerSetDataModel"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "AnswerSet has been created.",
+              "schema": {
+                "$ref": "#/definitions/assessmentResult"
+              }
+            },
+            "400": {
+              "description": "Invalid input.",
+              "schema": {
+                "type": "string"
+              }
+            },
+            "500": {
+              "description": "Internal Error from Server or downstream service.",
+              "schema": {
+                "type": "string"
+              }
+            }
+          },
+          "x-ms-visibility": "important"
+        }
+      },
+      "/AnswerSet/{AnswerSetId}": {
+        "get": {
+          "tags": [
+            "Answerset"
+          ],
+          "description": "Retriews all the answers, instrument wise for a questionnaire for a particular aswerset Id",
+          "operationId": "GetAnswerSet",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "path",
+              "name": "AnswerSetId",
+              "description": "The Id of the AnswerSet",
+              "required": true,
+              "type": "string",
+              "x-ms-visibility": "important"
+            },
+            {
+              "in": "header",
+              "name": "userid",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "in": "header",
+              "name": "X-Local-Time",
+              "required": true,
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "in": "header",
+              "name": "organisations",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful operation.",
+              "schema": {
+                "$ref": "#/definitions/assessmentAnswer"
+              }
+            },
+            "400": {
+              "description": "Invalid input.",
+              "schema": {
+                "type": "string"
+              }
+            },
+            "500": {
+              "description": "Internal Error from Server or downstream service.",
+              "schema": {
+                "type": "string"
+              }
+            }
+          },
+          "x-ms-visibility": "important"
+        }
+      },
+      "/AnswerSet/{AnswerSetId}/{InstrumentId}": {
+        "get": {
+          "tags": [
+            "Answerset"
+          ],
+          "description": "Retieves all the answers for a instrument in the questionnaire based on answerset id",
+          "operationId": "GetAnswerSetByInstrument",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "path",
+              "name": "AnswerSetId",
+              "description": "The Id of the AnswerSet",
+              "required": true,
+              "type": "string",
+              "x-ms-visibility": "important"
+            },
+            {
+              "in": "path",
+              "name": "InstrumentId",
+              "description": "The Id of the Instrument",
+              "required": true,
+              "type": "string",
+              "x-ms-visibility": "important"
+            },
+            {
+              "in": "header",
+              "name": "userid",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "in": "header",
+              "name": "X-Local-Time",
+              "required": true,
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "in": "header",
+              "name": "organisations",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful operation.",
+              "schema": {
+                "$ref": "#/definitions/assessmentAnswer"
+              }
+            },
+            "400": {
+              "description": "Invalid input.",
+              "schema": {
+                "type": "string"
+              }
+            },
+            "500": {
+              "description": "Internal Error from Server or downstream service.",
+              "schema": {
+                "type": "string"
+              }
+            }
+          },
+          "x-ms-visibility": "important"
+        }
+      },
+      "/Assessments": {
+        "get": {
+          "tags": [
+            "Assessment"
+          ],
+          "description": "Gets the list of all assessments available (Shallow object)",
+          "operationId": "GetAllAssessments",
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful operation.",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/assessmentViewModel"
+                }
+              }
+            },
+            "400": {
+              "description": "Invalid Assessment Type.",
+              "schema": {
+                "type": "string"
+              }
+            },
+            "500": {
+              "description": "Internal Error from Server or downstream service.",
+              "schema": {
+                "type": "string"
+              }
+            },
+            "404": {
+              "description": "Assessment with specified type was not found."
+            }
+          },
+          "x-ms-visibility": "important"
+        }
+      },
+      "/Assessments/{assessmenttype}": {
+        "get": {
+          "tags": [
+            "Assessment"
+          ],
+          "description": "Gets all Assessments available for particular assessmenttype (Shallow object)",
+          "operationId": "GetAssessments",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "path",
+              "name": "assessmenttype",
+              "description": "The Assessment Type.  ",
+              "required": true,
+              "type": "string",
+              "x-ms-visibility": "important"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful operation.",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/assessmentViewModel"
+                }
+              }
+            },
+            "400": {
+              "description": "Invalid Assessment Type.",
+              "schema": {
+                "type": "string"
+              }
+            },
+            "500": {
+              "description": "Internal Error from Server or downstream service.",
+              "schema": {
+                "type": "string"
+              }
+            },
+            "404": {
+              "description": "Assessment with specified type was not found."
+            }
+          },
+          "x-ms-visibility": "important"
+        }
+      },
+      "/Assessment/{id}": {
+        "get": {
+          "tags": [
+            "Assessment"
+          ],
+          "description": "Gets the complete assessment details along with the instruments and questions",
+          "operationId": "GetCompleteAssessment",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "path",
+              "name": "id",
+              "description": "The Assessment Id.  ",
+              "required": true,
+              "type": "string",
+              "x-ms-visibility": "important"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful operation.",
+              "schema": {
+                "$ref": "#/definitions/assessmentViewModel"
+              }
+            },
+            "400": {
+              "description": "Invalid Id.",
+              "schema": {
+                "type": "string"
+              }
+            },
+            "500": {
+              "description": "Internal Error from Server or downstream service.",
+              "schema": {
+                "type": "string"
+              }
+            },
+            "404": {
+              "description": "Assessment with specified Id was not found."
+            }
+          },
+          "x-ms-visibility": "important"
+        }
+      },
+      "/AssessmentInstrument/{id}": {
+        "get": {
+          "tags": [
+            "Assessment"
+          ],
+          "description": "Get the details of an instrument along with questions",
+          "operationId": "GetAssessmentInstrument",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "path",
+              "name": "id",
+              "description": "The Assessment Instrument Id.  ",
+              "required": true,
+              "type": "string",
+              "x-ms-visibility": "important"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful operation.",
+              "schema": {
+                "$ref": "#/definitions/instrument"
+              }
+            },
+            "400": {
+              "description": "Invalid Id.",
+              "schema": {
+                "type": "string"
+              }
+            },
+            "500": {
+              "description": "Internal Error from Server or downstream service.",
+              "schema": {
+                "type": "string"
+              }
+            },
+            "404": {
+              "description": "AssessmentInstrument with specified Id was not found."
+            }
+          },
+          "x-ms-visibility": "important"
+        }
+      },
+      "/HealthDomainSnapshot/{healthdomain}": {
+        "get": {
+          "tags": [
+            "AssessmentMark"
+          ],
+          "description": "Gets a snapshot of the latest assessment marks based on the Health domain",
+          "operationId": "GetAssessmentMarkSnapshot",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "path",
+              "name": "healthdomain",
+              "description": "The healthdomain",
+              "required": true,
+              "type": "string",
+              "x-ms-visibility": "important"
+            },
+            {
+              "in": "header",
+              "name": "userid",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful operation.",
+              "schema": {
+                "$ref": "#/definitions/assessmentMark"
+              }
+            },
+            "400": {
+              "description": "Invalid healthdomain",
+              "schema": {
+                "type": "string"
+              }
+            },
+            "500": {
+              "description": "Internal Error from Server or downstream service.",
+              "schema": {
+                "type": "string"
+              }
+            },
+            "204": {
+              "description": "no content found"
+            }
+          },
+          "x-ms-visibility": "important"
+        }
+      },
+      "/Snapshot/Latest": {
+        "get": {
+          "tags": [
+            "AssessmentMark"
+          ],
+          "description": "Gets a snapshot of the latest assessment mark for all the domains",
+          "operationId": "GetLatestAssessmentMarkSnapshot",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "header",
+              "name": "userid",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful operation.",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/assessmentMark"
+                }
+              }
+            },
+            "500": {
+              "description": "Internal Error from Server or downstream service.",
+              "schema": {
+                "type": "string"
+              }
+            },
+            "204": {
+              "description": "no content found"
+            }
+          },
+          "x-ms-visibility": "important"
+        }
+      },
+      "/AssessmentResult/Id/{answersetId}": {
+        "get": {
+          "tags": [
+            "AssessmentResult"
+          ],
+          "description": "Gets assessmentResult by AnswerSetId.",
+          "operationId": "GetAssessmentResult",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "path",
+              "name": "answersetId",
+              "description": "The Id of the Answerset",
+              "required": true,
+              "type": "string",
+              "x-ms-visibility": "important"
+            },
+            {
+              "in": "header",
+              "name": "userid",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful operation.",
+              "schema": {
+                "$ref": "#/definitions/assessmentResult"
+              }
+            },
+            "400": {
+              "description": "Invalid Id.",
+              "schema": {
+                "type": "string"
+              }
+            },
+            "500": {
+              "description": "Internal Error from Server or downstream service.",
+              "schema": {
+                "type": "string"
+              }
+            },
+            "404": {
+              "description": "AssessmentResult with specified Id was not found."
+            }
+          },
+          "x-ms-visibility": "important"
+        }
+      },
+      "/AssessmentResults/Assessment/{AssessmentId}": {
+        "get": {
+          "tags": [
+            "AssessmentResult"
+          ],
+          "description": "Get completed assessmentResults for an assessment based on assessment Id.",
+          "operationId": "GetAssessmentResultsByAssessemntId",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "path",
+              "name": "AssessmentId",
+              "description": "The Id of the Assessment",
+              "required": true,
+              "type": "string",
+              "x-ms-visibility": "important"
+            },
+            {
+              "in": "header",
+              "name": "userid",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful operation.",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/assessmentResult"
+                }
+              }
+            },
+            "400": {
+              "description": "Invalid AssessmentId.",
+              "schema": {
+                "type": "string"
+              }
+            },
+            "500": {
+              "description": "Internal Error from Server or downstream service.",
+              "schema": {
+                "type": "string"
+              }
+            },
+            "204": {
+              "description": "Assessment contains no Marks."
+            }
+          },
+          "x-ms-visibility": "important"
+        }
+      },
+      "/AssessmentResult/Latest": {
+        "get": {
+          "tags": [
+            "AssessmentResult"
+          ],
+          "description": "Gets a single latest result for user.",
+          "operationId": "GetLatestAssessmentResultByUser",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "header",
+              "name": "userid",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "in": "header",
+              "name": "organisations",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful operation.",
+              "schema": {
+                "$ref": "#/definitions/assessmentResult"
+              }
+            },
+            "500": {
+              "description": "Internal Error from Server or downstream service.",
+              "schema": {
+                "type": "string"
+              }
+            },
+            "204": {
+              "description": "no completed assessment"
+            }
+          },
+          "x-ms-visibility": "important"
+        }
+      },
+      "/AssessmentResults/Last/{count}": {
+        "get": {
+          "tags": [
+            "AssessmentResult"
+          ],
+          "description": "Gets a list latest result set for user.",
+          "operationId": "GetLastAssessmentResultsByUser",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "path",
+              "name": "count",
+              "description": "Number of assessmentresult to retrieve",
+              "required": true,
+              "type": "integer",
+              "format": "int32",
+              "x-ms-visibility": "important"
+            },
+            {
+              "in": "header",
+              "name": "userid",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful operation.",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/assessmentResult"
+                }
+              }
+            },
+            "500": {
+              "description": "Internal Error from Server or downstream service.",
+              "schema": {
+                "type": "string"
+              }
+            },
+            "204": {
+              "description": "no completed assessment"
+            }
+          },
+          "x-ms-visibility": "important"
+        }
+      },
+      "/AssessmentResult/Latest/Assessment/{AssessmentId}": {
+        "get": {
+          "tags": [
+            "AssessmentResult"
+          ],
+          "description": "Get latest result for an Assessment based on assessment Id.",
+          "operationId": "GetLatestAssessmentResultsByAssessemntId",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "path",
+              "name": "AssessmentId",
+              "description": "The Id of the Assessment",
+              "required": true,
+              "type": "string",
+              "x-ms-visibility": "important"
+            },
+            {
+              "in": "header",
+              "name": "userid",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful operation.",
+              "schema": {
+                "$ref": "#/definitions/assessmentResult"
+              }
+            },
+            "400": {
+              "description": "Invalid AssessmentId.",
+              "schema": {
+                "type": "string"
+              }
+            },
+            "500": {
+              "description": "Internal Error from Server or downstream service.",
+              "schema": {
+                "type": "string"
+              }
+            },
+            "204": {
+              "description": "no completed assessment"
+            }
+          },
+          "x-ms-visibility": "important"
+        }
+      },
+      "/UserGoal": {
+        "get": {
+          "tags": [
+            "UserGoal"
+          ],
+          "description": "Get the saved goal for the user",
+          "operationId": "getUserGoals",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "header",
+              "name": "userid",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful operation.",
+              "schema": {
+                "$ref": "#/definitions/userGoal"
+              }
+            },
+            "500": {
+              "description": "Internal Error from Server or downstream service.",
+              "schema": {
+                "type": "string"
+              }
+            },
+            "404": {
+              "description": "Goal was not found."
+            }
+          },
+          "x-ms-visibility": "important"
+        },
+        "post": {
+          "tags": [
+            "UserGoal"
+          ],
+          "description": "Creates a new UserGoal for a UserId.",
+          "operationId": "SaveUserGoal",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "header",
+              "name": "userid",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "in": "body",
+              "name": "body",
+              "description": "The goal that needs to be created for a UserId.",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/userGoalDataModel"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "UserGoal has been created.",
+              "schema": {
+                "type": "boolean"
+              }
+            },
+            "400": {
+              "description": "Invalid input.",
+              "schema": {
+                "type": "string"
+              }
+            },
+            "500": {
+              "description": "Internal Error from Server or downstream service.",
+              "schema": {
+                "type": "string"
+              }
+            }
+          },
+          "x-ms-visibility": "important"
+        }
+      },
+      "/HealthDomains": {
+        "get": {
+          "tags": [
+            "Health Domain"
+          ],
+          "description": "Gets the list of all Health Domains applicable for Thrive.",
+          "operationId": "GetHealthDomains",
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful operation.",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/healthDomain"
+                }
+              }
+            },
+            "500": {
+              "description": "Internal Error from Server or downstream service.",
+              "schema": {
+                "type": "string"
+              }
+            }
+          },
+          "x-ms-visibility": "important"
+        }
+      },
+      "/LearningResources": {
+        "get": {
+          "tags": [
+            "LearningResource"
+          ],
+          "description": "Gets a list of all LearningResources",
+          "operationId": "getLearningResources",
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful operation.",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/iLearningResource"
+                }
+              }
+            },
+            "500": {
+              "description": "Internal Error from Server or downstream service.",
+              "schema": {
+                "type": "string"
+              }
+            },
+            "404": {
+              "description": "Learning Resources was not found."
+            }
+          },
+          "x-ms-visibility": "important"
+        }
+      },
+      "/v2/LearningResources": {
+        "get": {
+          "tags": [
+            "LearningResource"
+          ],
+          "description": "Gets a list of all Learning Resources With Featured",
+          "operationId": "getLearningResourcesWithFeatured",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "header",
+              "name": "organisations",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful operation.",
+              "schema": {
+                "$ref": "#/definitions/learningResourceWithFeaturedViewDataModel"
+              }
+            },
+            "500": {
+              "description": "Internal Error from Server or downstream service.",
+              "schema": {
+                "type": "string"
+              }
+            },
+            "404": {
+              "description": "Learning Resources were not found."
+            }
+          },
+          "x-ms-visibility": "important"
+        }
+      },
+      "/LearningResource/{modality}/{id}": {
+        "get": {
+          "tags": [
+            "LearningResource"
+          ],
+          "description": "Gets an LearningResource by Id and modality",
+          "operationId": "getLearningResource",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "path",
+              "name": "modality",
+              "description": "The LearningResource modality.  ",
+              "required": true,
+              "type": "string",
+              "x-ms-visibility": "important"
+            },
+            {
+              "in": "path",
+              "name": "id",
+              "description": "The LearningResource Id.  ",
+              "required": true,
+              "type": "string",
+              "x-ms-visibility": "important"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful operation.",
+              "schema": {
+                "$ref": "#/definitions/iLearningResource"
+              }
+            },
+            "400": {
+              "description": "Invalid Id.",
+              "schema": {
+                "type": "string"
+              }
+            },
+            "500": {
+              "description": "Internal Error from Server or downstream service.",
+              "schema": {
+                "type": "string"
+              }
+            },
+            "404": {
+              "description": "Assessment with specified Id was not found."
+            }
+          },
+          "x-ms-visibility": "important"
+        }
+      },
+      "/Notification/{resource}": {
+        "get": {
+          "tags": [
+            "Notification"
+          ],
+          "description": "Get a user notification based on the resource provided",
+          "operationId": "getNotifications",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "header",
+              "name": "userid",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "in": "path",
+              "name": "resource",
+              "description": "Notification Resource type",
+              "required": true,
+              "type": "string",
+              "x-ms-visibility": "important"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful operation.",
+              "schema": {
+                "$ref": "#/definitions/notificationViewModel"
+              }
+            },
+            "500": {
+              "description": "Internal Error from Server or downstream service.",
+              "schema": {
+                "type": "string"
+              }
+            },
+            "404": {
+              "description": "Notification was not found."
+            }
+          },
+          "x-ms-visibility": "important"
+        },
+        "post": {
+          "tags": [
+            "Notification"
+          ],
+          "description": "Update the Last Seen value of notification for a resource",
+          "operationId": "SaveNotificationLastView",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "header",
+              "name": "userid",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "in": "path",
+              "name": "resource",
+              "description": "Notification Resource type",
+              "required": true,
+              "type": "string",
+              "x-ms-visibility": "important"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Notification has been created.",
+              "schema": {
+                "type": "boolean"
+              }
+            },
+            "400": {
+              "description": "Invalid input.",
+              "schema": {
+                "type": "string"
+              }
+            },
+            "500": {
+              "description": "Internal Error from Server or downstream service.",
+              "schema": {
+                "type": "string"
+              }
+            }
+          },
+          "x-ms-visibility": "important"
+        }
+      },
+      "/Recommendation/Items/{count}": {
+        "get": {
+          "tags": [
+            "Recommendation"
+          ],
+          "description": "Gets a list of Recommendation Item,include Activity and Content",
+          "operationId": "GetRecommendedItems",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "path",
+              "name": "count",
+              "description": "Number of item to retrieve",
+              "required": true,
+              "type": "integer",
+              "format": "int32",
+              "x-ms-visibility": "important"
+            },
+            {
+              "in": "header",
+              "name": "userid",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful operation.",
+              "schema": {
+                "$ref": "#/definitions/recommendationViewModel"
+              }
+            },
+            "400": {
+              "description": "Invalid UserId.",
+              "schema": {
+                "type": "string"
+              }
+            },
+            "500": {
+              "description": "Internal Error from Server or downstream service.",
+              "schema": {
+                "type": "string"
+              }
+            }
+          },
+          "x-ms-visibility": "important"
+        }
+      },
+      "/Recommendation/ByAssessment/{assessmentId}/{count}": {
+        "get": {
+          "tags": [
+            "Recommendation"
+          ],
+          "description": "Gets a list of Recommendation Item,include Activity and Content By Assessment",
+          "operationId": "GetRecommendedItemsByAssessement",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "path",
+              "name": "assessmentId",
+              "description": "the assessmentid",
+              "required": true,
+              "type": "string",
+              "x-ms-visibility": "important"
+            },
+            {
+              "in": "path",
+              "name": "count",
+              "description": "Number of item to retrieve",
+              "required": true,
+              "type": "integer",
+              "format": "int32",
+              "x-ms-visibility": "important"
+            },
+            {
+              "in": "header",
+              "name": "userid",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful operation.",
+              "schema": {
+                "$ref": "#/definitions/recommendationViewModel"
+              }
+            },
+            "400": {
+              "description": "Invalid UserId.",
+              "schema": {
+                "type": "string"
+              }
+            },
+            "500": {
+              "description": "Internal Error from Server or downstream service.",
+              "schema": {
+                "type": "string"
+              }
+            }
+          },
+          "x-ms-visibility": "important"
+        }
+      },
+      "/SeekHelpActionTaken": {
+        "post": {
+          "tags": [
+            "UserProfile"
+          ],
+          "description": "Set Seek Help Action Taken",
+          "operationId": "SetSeekHelpActionTaken",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "header",
+              "name": "userid",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "in": "header",
+              "name": "organisations",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "in": "header",
+              "name": "Authorization",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful operation.",
+              "schema": {
+                "type": "boolean"
+              }
+            },
+            "500": {
+              "description": "Internal Error from Server or downstream service.",
+              "schema": {
+                "type": "string"
+              }
+            }
+          },
+          "x-ms-visibility": "important"
+        }
+      },
+      "/UserProfile": {
+        "get": {
+          "tags": [
+            "UserProfile"
+          ],
+          "description": "Get the user's profile details, ex: Onboarding Completed",
+          "operationId": "GetUserProfile",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "header",
+              "name": "userid",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "in": "header",
+              "name": "organisations",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "in": "header",
+              "name": "Authorization",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful operation.",
+              "schema": {
+                "$ref": "#/definitions/userProfileViewModel"
+              }
+            },
+            "400": {
+              "description": "Invalid UserId.",
+              "schema": {
+                "type": "string"
+              }
+            },
+            "500": {
+              "description": "Internal Error from Server or downstream service.",
+              "schema": {
+                "type": "string"
+              }
+            }
+          },
+          "x-ms-visibility": "important"
+        }
+      },
+      "/UserHasOnboarded": {
+        "post": {
+          "tags": [
+            "UserProfile"
+          ],
+          "description": "Set the User Onboarded flag",
+          "operationId": "SetUserHasOnboarded",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "header",
+              "name": "userid",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "in": "header",
+              "name": "organisations",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "in": "header",
+              "name": "Authorization",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful operation.",
+              "schema": {
+                "type": "boolean"
+              }
+            },
+            "400": {
+              "description": "Invalid UserId.",
+              "schema": {
+                "type": "string"
+              }
+            },
+            "500": {
+              "description": "Internal Error from Server or downstream service.",
+              "schema": {
+                "type": "string"
+              }
+            }
+          },
+          "x-ms-visibility": "important"
+        }
+      }
+    },
+    "definitions": {
+      "activityArchiveDataModel": {
+        "type": "object",
+        "properties": {
+          "activityCommitmentId": {
+            "type": "string"
+          }
+        }
+      },
+      "activityCommitmentDataModel": {
+        "type": "object",
+        "properties": {
+          "activityId": {
+            "type": "string"
+          },
+          "activityCommitmentId": {
+            "type": "string"
+          },
+          "targetFrequency": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "isCustomActivity": {
+            "type": "boolean"
+          }
+        }
+      },
+      "activityCommitmentViewModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "userId": {
+            "type": "string"
+          },
+          "activityId": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "summary": {
+            "type": "string"
+          },
+          "description": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "commitmentDate": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "imageUrl": {
+            "type": "string"
+          },
+          "pngImageUrl": {
+            "type": "string"
+          },
+          "unitOfTime": {
+            "type": "string"
+          },
+          "healthDomains": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "frequency": {
+            "$ref": "#/definitions/frequencyViewModel"
+          },
+          "contentUrl": {
+            "type": "string"
+          },
+          "isCustomActivity": {
+            "type": "boolean"
+          },
+          "organisation": {
+            "type": "string"
+          },
+          "streakCount": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "tracking": {
+            "$ref": "#/definitions/activityTrackingViewModel"
+          },
+          "activityStreaks": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/activityStreaks"
+            }
+          }
+        }
+      },
+      "activityTracking": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "userId": {
+            "type": "string"
+          },
+          "activityId": {
+            "type": "string"
+          },
+          "activityCommitmentId": {
+            "type": "string"
+          },
+          "trackingDateTime": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "localTrackingDateTime": {
+            "format": "date-time",
+            "type": "string"
+          }
+        }
+      },
+      "activityTrackingDataModel": {
+        "type": "object",
+        "properties": {
+          "activityId": {
+            "type": "string"
+          },
+          "activityCommitmentId": {
+            "type": "string"
+          },
+          "trackingDateTime": {
+            "format": "date-time",
+            "type": "string"
+          }
+        }
+      },
+      "activityTrackingStatusDayViewModel": {
+        "type": "object",
+        "properties": {
+          "trackingPeriodStartDateTime": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "hasActivityTracking": {
+            "type": "boolean"
+          },
+          "trackingCount": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "trackingPeriodStartDateTimeUtc": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "trackings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/activityTracking"
+            }
+          }
+        }
+      },
+      "activityTrackingStatusViewModel": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string"
+          },
+          "activityCommitmentId": {
+            "type": "string"
+          },
+          "activityTrackingStatus": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/activityTrackingStatusDayViewModel"
+            }
+          }
+        }
+      },
+      "activityTrackingViewModel": {
+        "type": "object",
+        "properties": {
+          "tally": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "trackedToday": {
+            "type": "boolean"
+          },
+          "reachedTargetBeforeToday": {
+            "type": "boolean"
+          }
+        }
+      },
+      "activityViewModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "summary": {
+            "type": "string"
+          },
+          "description": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "imageUrl": {
+            "type": "string"
+          },
+          "pngImageUrl": {
+            "type": "string"
+          },
+          "unitOfTime": {
+            "type": "string"
+          },
+          "healthDomains": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "contentUrl": {
+            "type": "string"
+          },
+          "isDefaultRecommendation": {
+            "type": "boolean"
+          },
+          "modeltype": {
+            "type": "string"
+          },
+          "frequency": {
+            "$ref": "#/definitions/frequencyViewModel"
+          }
+        }
+      },
+      "answer": {
+        "type": "object",
+        "properties": {
+          "questionId": {
+            "type": "string"
+          },
+          "ValueType": {
+            "format": "int32",
+            "default": 0,
+            "enum": [
+              0,
+              1
+            ],
+            "type": "integer"
+          },
+          "value": {
+            "type": "string"
+          }
+        }
+      },
+      "answerSet": {
+        "type": "object",
+        "properties": {
+          "instrumentId": {
+            "type": "string"
+          },
+          "healthDomain": {
+            "type": "string"
+          },
+          "answerSetSubmissionTime": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "answers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/answer"
+            }
+          }
+        }
+      },
+      "answerSetDataModel": {
+        "type": "object",
+        "properties": {
+          "assessmentId": {
+            "type": "string"
+          },
+          "isAssessmentCompleted": {
+            "type": "boolean"
+          },
+          "assessmentAnswerId": {
+            "type": "string"
+          },
+          "instrumentId": {
+            "type": "string"
+          },
+          "healthDomain": {
+            "type": "string"
+          },
+          "assessmentStartTime": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "answers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/answer"
+            }
+          }
+        }
+      },
+      "assessmentAnswer": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "userId": {
+            "type": "string"
+          },
+          "assessmentId": {
+            "type": "string"
+          },
+          "assessmentTitle": {
+            "type": "string"
+          },
+          "isAssessmentCompleted": {
+            "type": "boolean"
+          },
+          "assessmentStartTime": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "assessmentSubmissionTime": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "answerSets": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/answerSet"
+            }
+          }
+        }
+      },
+      "assessmentMark": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "userId": {
+            "type": "string"
+          },
+          "assessmentId": {
+            "type": "string"
+          },
+          "instrumentId": {
+            "type": "string"
+          },
+          "assessmentAnswerId": {
+            "type": "string"
+          },
+          "assessmentTitle": {
+            "type": "string"
+          },
+          "healthDomain": {
+            "type": "string"
+          },
+          "isAssessmentCompleted": {
+            "type": "boolean"
+          },
+          "assessmentStartTime": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "markTime": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "score": {
+            "format": "double",
+            "type": "number"
+          },
+          "grade": {
+            "$ref": "#/definitions/grade"
+          },
+          "userTraits": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "assessmentResult": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string"
+          },
+          "assessmentId": {
+            "type": "string"
+          },
+          "answerSetId": {
+            "type": "string"
+          },
+          "assessmentTitle": {
+            "type": "string"
+          },
+          "isCompleted": {
+            "type": "boolean"
+          },
+          "assessmentStartTime": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "assessmentSubmissionTime": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "marks": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/assessmentMark"
+            }
+          }
+        }
+      },
+      "assessmentViewModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "duration": {
+            "type": "string"
+          },
+          "lastUpdated": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "recommended": {
+            "type": "boolean"
+          },
+          "iconUrl": {
+            "type": "string"
+          },
+          "instruments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/instrument"
+            }
+          },
+          "lastSubmissionTime": {
+            "format": "date-time",
+            "type": "string"
+          }
+        }
+      },
+      "customActivityDataModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "healthDomains": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "targetFrequency": {
+            "format": "int32",
+            "type": "integer"
+          }
+        }
+      },
+      "frequencyViewModel": {
+        "type": "object",
+        "properties": {
+          "period": {
+            "type": "string"
+          },
+          "unit": {
+            "type": "string"
+          },
+          "max": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "defaultTarget": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "target": {
+            "format": "int32",
+            "type": "integer"
+          }
+        }
+      },
+      "grade": {
+        "type": "object",
+        "properties": {
+          "max": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "value": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "label": {
+            "type": "string"
+          }
+        }
+      },
+      "healthDomain": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          }
+        }
+      },
+      "iLearningResource": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "healthDomains": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "showIfUserHaveTrait": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "title": {
+            "type": "string"
+          },
+          "modality": {
+            "type": "string"
+          },
+          "image": {
+            "$ref": "#/definitions/imageModel"
+          },
+          "heroImage": {
+            "$ref": "#/definitions/imageModel"
+          },
+          "duration": {
+            "type": "string"
+          },
+          "date": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "organisation": {
+            "type": "string"
+          },
+          "isDefaultRecommendation": {
+            "type": "boolean"
+          }
+        }
+      },
+      "imageModel": {
+        "type": "object",
+        "properties": {
+          "smallImageUrl": {
+            "type": "string"
+          },
+          "largeImageUrl": {
+            "type": "string"
+          }
+        }
+      },
+      "images": {
+        "type": "object",
+        "properties": {
+          "imageUrl": {
+            "type": "string"
+          },
+          "altText": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      },
+      "instrument": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "healthDomain": {
+            "type": "string"
+          },
+          "instruction": {
+            "type": "string"
+          },
+          "questions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/question"
+            }
+          }
+        }
+      },
+      "learningResourceWithFeaturedViewDataModel": {
+        "type": "object",
+        "properties": {
+          "featured": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "learnContent": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/iLearningResource"
+            }
+          }
+        }
+      },
+      "notificationViewModel": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string"
+          },
+          "notificationResource": {
+            "type": "string"
+          },
+          "lastViewed": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "displayNotification": {
+            "type": "boolean"
+          },
+          "notification": {
+            "type": "string"
+          }
+        }
+      },
+      "object": {
+        "type": "object"
+      },
+      "question": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "instrumentId": {
+            "type": "string"
+          },
+          "order": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "questionNumber": {
+            "type": "string"
+          },
+          "text": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "inputLabel": {
+            "type": "string"
+          },
+          "assessmentImages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/images"
+            }
+          },
+          "questionOptions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/questionOption"
+            }
+          },
+          "helperText": {
+            "type": "string"
+          },
+          "minValue": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "maxValue": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "increment": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "minValueLabel": {
+            "type": "string"
+          },
+          "maxValueLabel": {
+            "type": "string"
+          },
+          "placeholderText": {
+            "type": "string"
+          },
+          "isOptional": {
+            "type": "string"
+          },
+          "conditions": {
+            "$ref": "#/definitions/object"
+          },
+          "initialValue": {
+            "type": "string"
+          }
+        }
+      },
+      "questionOption": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          }
+        }
+      },
+      "recommendationViewModel": {
+        "type": "object",
+        "properties": {
+          "focusedHealthDomain": {
+            "type": "string"
+          },
+          "recommendations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/object"
+            }
+          },
+          "recommendingMark": {
+            "$ref": "#/definitions/assessmentMark"
+          },
+          "assessmentMark": {
+            "$ref": "#/definitions/assessmentMark"
+          },
+          "affirmationWord": {
+            "type": "string"
+          },
+          "seekHelp": {
+            "$ref": "#/definitions/seekHelpConfiguration"
+          }
+        }
+      },
+      "seekHelpActionConfiguration": {
+        "type": "object",
+        "properties": {
+          "label": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "action": {
+            "type": "string"
+          }
+        }
+      },
+      "seekHelpConfiguration": {
+        "type": "object",
+        "properties": {
+          "organisation": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "actions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/seekHelpActionConfiguration"
+            }
+          }
+        }
+      },
+      "userGoal": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "userId": {
+            "type": "string"
+          },
+          "goal": {
+            "type": "string"
+          },
+          "healthDomains": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "updatedDate": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "lastViewedDate": {
+            "format": "date-time",
+            "type": "string"
+          }
+        }
+      },
+      "userGoalDataModel": {
+        "type": "object",
+        "properties": {
+          "goal": {
+            "type": "string"
+          }
+        }
+      },
+      "userProfileViewModel": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string"
+          },
+          "organisations": {
+            "type": "string"
+          },
+          "hasOnboarded": {
+            "type": "boolean"
+          },
+          "hasAnsweredFullQuestionnaire": {
+            "type": "boolean"
+          },
+          "givenName": {
+            "type": "string"
+          },
+          "surname": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }

@@ -153,7 +153,7 @@ export default function App() {
   },[])
 
   const checkToken = async () => {
-      getItem('token').then((token)=>{
+      getItem('token').then((token:any)=>{
           if(token){
             console.log('token', token)
               setIsLoggedIn(true);
