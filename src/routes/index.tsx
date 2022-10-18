@@ -190,8 +190,9 @@ export default function App() {
               loginPolicy="B2C_1A_signin_only"
               passwordResetPolicy="B2C_1A_DISPLAYCONTROL_SENDGRID_PASSWORDRESET"
               profileEditPolicy="B2C_1_ProfleEdit"
-              redirectURI={Linking.createURL("msauth://org.innowell.thrivedev/redirect")}
-              // redirectURI={Linking.createURL("redirect")}
+              // redirectURI={'msauth://org.innowell.thrivedev/redirect'}
+              // redirectURI={Linking.createURL("msauth://org.innowell.thrivedev/redirect")}
+              redirectURI={Linking.createURL("redirect")}
               createNewTask={Constants.appOwnership === "expo"}
               showInRecents={Constants.appOwnership === "expo"}
           >
